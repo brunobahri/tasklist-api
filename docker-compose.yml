@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - ~/.m2:/root/.m2
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlite:/data/tasklist.db
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.sqlite.JDBC
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.SQLiteDialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - sqlite
+
+  sqlite:
+    image: nouchka/sqlite3
+    volumes:
+      - sqlite_data:/data
+
+volumes:
+  sqlite_data:
