@@ -5,21 +5,20 @@ services:
     build: .
     ports:
       - "8080:8080"
-    volumes:
-      - .:/app
-      - ~/.m2:/root/.m2
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlite:/data/tasklist.db
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.sqlite.JDBC
-      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.SQLiteDialect
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     depends_on:
-      - sqlite
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tasklistdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
 
-  sqlite:
-    image: nouchka/sqlite3
-    volumes:
-      - sqlite_data:/data
-
-volumes:
-  sqlite_data:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: tasklistdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
