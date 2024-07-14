@@ -1,5 +1,4 @@
 package com.brunobahri.tasklist.dto;
-
 import lombok.Data;
 
 @Data
