@@ -1,5 +1,4 @@
 package com.brunobahri.tasklist.model;
-
 import javax.persistence.*;
 import lombok.Data;
 
