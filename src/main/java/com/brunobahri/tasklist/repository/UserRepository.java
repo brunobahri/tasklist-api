@@ -1,5 +1,4 @@
 package com.brunobahri.tasklist.repository;
-
 import com.brunobahri.tasklist.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
